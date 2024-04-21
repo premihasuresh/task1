@@ -1,0 +1,266 @@
+1.Difference between HTTP 1.1 and HTTP 2
+
+
+Http 1.1
+Http 1.1 works on textual format. It allowed multiple requests/responses per TCP connection.
+There is a head of line blocking all requests behindit until it gets all the resources
+It uses requests inline to get multiple pages
+It compress data by itself
+
+
+Http 2
+Http2 works on binary protocol[It is a binary protocol i.e. only binary commands in the form of 0s and 1s are transmitted over the wire. The binary framing layer divides the message into frames that are segregated based on their type 
+It allows multiplexig so one TCP connection is required for multiple requests
+It uses push frame by server to collect multiple pages[the server pushes the content before the client is requesting]
+It used HPACK to compress the data
+
+
+Key Features of HTTP/1.1:
+
+    It was no longer required for each connection to be terminated immediately after every request was served with a response; instead, with the keep-alive header, 
+	it was possible to have persistent connections. It allowed multiple requests/responses per TCP connection.
+    The Upgrade header was used to indicate a preference from the client that made it possible to switch to a more preferred protocol if found appropriate by the server.
+    HTTP/1.1 provided support for chunk transfers that allowed streaming of content dynamically as chunks and for additional headers to be sent after the message body. 
+	This enhancement was particularly useful in cases where values of a field remained unknown until the content had been produced. For example, when the content had to be digitally signed, it was not possible to do so before the entire content gets generated.
+    Other features that reinforced its stability were introduced such as:
+        pipelining (the second request is sent before the response to the first is adequately served)
+        content negotiation (an exchange between client and server to determine the media type, 
+		it also provides the provision to serve different versions of a resource at the same URI)
+        cache control (used to specify caching policies in both requests and responses)
+
+
+Keyfeatures of HTTP 2:
+
+    It introduces the concept of a server push where the server anticipates the resources that will be required by the client and pushes them prior to the client making requests. 
+	The client retains the authority to deny the server push; however, in most cases, this feature adds a lot of efficiency to the process.
+
+    Introduces the concept of multiplexing that interleaves the requests and responses without head-of-line blocking and does so over a single TCP connection.
+    
+	It is a binary protocol i.e. only binary commands in the form of 0s and 1s are transmitted over the wire. 
+	The binary framing layer divides the message into frames that are segregated based on their type – Data or Header. This feature greatly increases efficiency in terms of security, compression and multiplexing.
+
+
+
+    HTTP/2 uses HPACK header compression algorithm that is resilient to attacks like CRIME and utilizes static Huffman encoding.
+
+2.Write a blog about objects and its internal representation in Javascript
+Objects are important data types in javascript. Objects are different than primitive datatypes (i.e. number, string, boolean, etc.). 
+Primitive data types contain one value but Objects can hold many values in form of Key: value pair. 
+These keys can be variables or functions and are called properties and methods, respectively, in the context of an object.
+
+
+An object contains properties, or key-value pairs. The desk object above has four properties. 
+Each property has a name, which is also called a key, and a corresponding value. 
+
+
+var myCar = new Object();
+
+myCar.make = 'Suzuki';
+
+myCar.model = 'Altros';
+
+myCar.year = 1978;
+
+myCar.wheels = 2;
+
+
+Key value pair-
+A key-value pair is a data type that includes two pieces of data that have a set of associated values and a group of key identifiers. 
+Within a key-value pair, there are two related data elements. The first is a constant used to define the data set. 
+The other is a value, which is a variable belonging to the data set. 
+For example, a car might be a key, while the car's color, model or brand could be the values.
+
+You access the properties of an object with a simple dot-notation:
+
+objectName.propertyName
+
+For example, let’s create an object named myCar and give it properties named make, model, and year as follows:
+
+var myCar = new Object();
+myCar.make = 'Ford';
+myCar.model = 'Mustang';
+myCar.year = 1969;
+
+Unassigned properties of an object are undefined (and not null).
+
+ Objects are sometimes called associative arrays, since each property is associated with a string value that can be used to access it.
+myCar['make'] = 'Ford';
+myCar['model'] = 'Mustang';
+myCar['year'] = 1969;
+
+An object property name can be any valid JavaScript string, or anything that can be converted to a string, including the empty string
+
+// four variables are created and assigned in a single go, 
+// separated by commas
+var myObj = new Object(),
+    str = 'myString',
+    rand = Math.random(),
+    obj = new Object();
+myObj.type              = 'Dot syntax';
+myObj['date created']   = 'String with space';
+myObj[str]              = 'String value';
+myObj[rand]             = 'Random Number';
+myObj[obj]              = 'Object';
+myObj['']               = 'Even an empty string';console.log(myObj);
+
+Create JavaScript Object with Object Literal
+
+One of easiest way to create a javascript object is object literal, simply define the property and values inside curly braces as shown below
+
+let bike = {name: 'SuperSport', maker:'Ducati', engine:'937cc'};
+
+
+Create JavaScript Object with Constructor
+
+Constructor is nothing but a function and with help of new keyword, constructor function allows to create multiple objects of same flavor as shown below
+
+function Vehicle(name, maker) {
+   this.name = name;
+   this.maker = maker;
+}
+let car1 = new Vehicle(’Fiesta’, 'Ford’);
+let car2 = new Vehicle(’Santa Fe’, 'Hyundai’)
+console.log(car1.name);    //Output: Fiesta
+console.log(car2.name);    //Output: Santa Fe
+
+Using the JavaScript Keyword new
+
+The following example also creates a new JavaScript object with four properties:
+
+Example
+
+var person = new Object();
+person.firstName = “John”;
+person.lastName = “Doe”;
+person.age = 50;
+person.eyeColor = “blue”;
+
+Objects can also be created using the Object.create() method. 
+This method can be very useful, because it allows you to choose the prototype object for the object you want to create, without having to define a constructor function.
+
+// Animal properties and method encapsulation
+var Animal = {
+  type: 'Invertebrates', // Default value of properties
+  displayType: function() {  // Method which will display type of Animal
+    console.log(this.type);
+  }
+};
+// Create new animal type called animal1 
+var animal1 = Object.create(Animal);
+animal1.displayType(); // Output:Invertebrates
+// Create new animal type called Fishes
+var fish = Object.create(Animal);
+fish.type = 'Fishes';
+fish.displayType(); // Output:Fishes
+
+4.Read about IP address, port, HTTP methods, MAC address	
+IP-Internet  Protocol
+This is just a set of rules that makes the internet work.
+IP address is a unqiue address but it is dynamic
+    
+	Our device directly requests the Internet Service Provider which then grants your device access to the web.
+    And an IP Address is assigned to our device from the given range available.
+    Internet activity goes through your service provider, and they route it back to us, using your IP address.
+    Our IP address can change. For example, turning your router on or off can change your IP Address.
+    When we are out from our home location our home IP address doesn’t accompany you. It changes as we change the network of your device.
+	
+	Two types of IP address:
+	IPV4-32 bits  - 0-255 -Four numbers separated by dots .A unique sequence number can be assigned to 2^32
+	
+	IPV6-128 bits - a unique sequence number can be assigned to 128 bits of 0s and 1s. 2^128
+	
+	
+	Classification of IP 
+	1.Public IP
+	  Dynamic IP-It is used when a device is connected to a network and changes when connected to other network 
+	  
+	  Static IP Address: Static address never changes. They serve as a permanent internet address. These are used by DNS servers.
+	  
+	2. Private IP
+	 This is an internal address of your device which are not routed to the internet and no exchange of data can take place between a private address and the internet.
+	 
+	 3. Shared IP addresses: Many websites use shared IP addresses where the traffic is not huge and very much controllable, they decide to rent it to other similar websites so to 
+	 make it cost-friendly. 
+	 Several companies and email sending servers use the same IP address (within a single mail server) to cut down the cost so that they could save for the time the server is idle.
+	 
+	 4.Dedicated IP addresses: A dedicated IP Address is an address used by a single company or an individual which gives them certain benefits 
+	   using a private Secure Sockets Layer (SSL) certificate which is not in the case of a shared IP address. 
+	   It allows to access the website or log in via File Transfer Protocol (FTP) by IP address instead of its domain name. 
+	   It increases the performance of the website when the traffic is high. It also protects from a shared IP address that is black-listed due to spam.
+	   
+Ports
+A port is a virtual point where network connections start and end. Ports are software-based and managed by a computer's operating system. 
+Each port is associated with a specific process or service. Ports allow computers to easily differentiate between different kinds of traffic: 
+emails go to a different port than webpages, for instance, even though both reach a computer over the same Internet connection.	   
+
+To determine what protocol incoming traffic should be directed to, different port numbers are used.
+Port is a gateway 
+
+Port is a logical address that is assigned to each application on the computer that utilizes the internet for communication.
+
+Port is an address of a 16-bit unsigned integer number that ranges from 0 to 65535.
+The primary application of a port number is to transmit the data between a Computer Network and an Application.
+Port is just a unique number assigned to every application of a computer.
+However, the operating system can automatically assign a port number to the application running on the computer.
+
+
+
+    Ports 20 and 21: FTP stands for File Transfer Protocol and is used to transmit files between a client and a serve and uses port numbers 20 & 21.
+
+    Network Port 22: The Protocol Secure Shell (SSH) uses port number 22 and creates secure network connections.
+
+    Port 25: Simple Mail Transfer Protocol (SMTP) uses port number 25 and it is utilized in transmitting mail.
+
+    A Port 80: Hypertext Transfer Protocol (HTTP) is the protocol that allows accessing web pages over the World Wide Web and uses port number 80.
+
+    Port 123: Network Time Protocol (NTP) use port number 123 and allows the computer clocks to sync. This process is required for the encryption process.
+
+    Port 179: Border Gateway Protocol (BGP) utilizes port number 179 and it is required for establishing efficient routes among the extensive networks that make up the Internet.
+
+    Port 443 stands for HTTP Secure and it is the secure and encrypted version of HTTP. All HTTPS web traffic goes to port number 443.
+
+    Port 500: Internet Security Association and Key Management Protocol (ISAKMP) uses port number 500 and it is part of the process of configuring secure IPsec connections.
+
+    Port 3389: Remote Desktop Protocol (RDP) uses port number 3389 port number and it allows users to connect remotely to their desktop computers and another device.
+	
+HTTP-Hyper Text Transfer Protocol
+
+
+HTTP stands for HyperText Transfer Protocol.
+It is a protocol used to access the data on the World Wide Web (www).
+The HTTP protocol can be used to transfer the data in the form of plain text, hypertext, audio, video, and so on.
+This protocol is known as HyperText Transfer Protocol because of its efficiency that allows us to use in a hypertext environment where there are rapid jumps from one document to another document.
+HTTP is similar to the FTP as it also transfers the files from one host to another host. But, HTTP is simpler than FTP as HTTP uses only one connection, i.e., no control connection to transfer the files.
+HTTP is used to carry the data in the form of MIME-like format.
+HTTP is similar to SMTP as the data is transferred between client and server. 
+The HTTP differs from the SMTP in the way the messages are sent from the client to the server and from server to the client. 
+SMTP messages are stored and forwarded while HTTP messages are delivered immediately.
+
+HTTP methods
+The most commonly used HTTP request methods are GET, POST, PUT, PATCH, and DELETE. These are equivalent to the CRUD operations (create, read, update, and delete).
+
+GET: GET request is used to read/retrieve data from a web server. GET returns an HTTP status code of 200 (OK) if the data is successfully retrieved from the server.
+
+POST: POST request is used to send data (file, form data, etc.) to the server. On successful creation, it returns an HTTP status code of 201.
+
+PUT: A PUT request is used to modify the data on the server. It replaces the entire content at a particular location with data that is passed in the body payload. 
+     If there are no resources that match the request, it will generate one.
+	 
+PATCH: PATCH is similar to PUT request, but the only difference is, it modifies a part of the data. It will only replace the content that you want to update.
+
+DELETE: A DELETE request is used to delete the data on the server at a specified location.
+
+
+MAC Address
+
+MAC Addresses are unique 48-bit hardware number of a computer, that is embedded into a network card (known as a Network Interface Card during manufacturing. 
+The MAC Address is also known as the Physical Address of a network device.
+
+The MAC address is used by the Media Access Control (MAC) sublayer of the Data-Link Layer. 
+MAC Address is worldwide unique since millions of network devices exist and we need to uniquely identify each.
+	 ipconfig/all-Physical address
+	 
+MAC addresses are used in LAN (Local Area Network) environments to identify devices and allow communication between them.
+MAC addresses are burned into the hardware of a network interface card (NIC) and cannot be changed, except in some rare cases where the manufacturer has provided a specific tool to do so.
+The first 3 bytes of a MAC address represent the manufacturer ID, while the last 3 bytes represent a unique identifier assigned by the manufacturer.
+MAC addresses are often used in conjunction with ARP (Address Resolution Protocol) to resolve IP addresses to MAC addresses for communication on a LAN.
